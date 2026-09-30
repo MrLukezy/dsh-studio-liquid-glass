@@ -6,7 +6,7 @@
 // take margin/padding/radius; ConversationRoot is never a slab. No DOM moves,
 // no MutationObserver, no stamping.
 window.__ModuleLoader__.load({
-  id: 'dsh-liquid-glass',
+  id: 'dsh-studio-liquid-glass',
   factory: (require) => {
     var module = { exports: {} }
     var exports = module.exports
