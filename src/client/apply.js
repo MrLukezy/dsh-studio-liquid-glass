@@ -20,6 +20,33 @@
         function () {
           var slots = ctx.get('slots')
           if (slots === undefined || React === undefined) return undefined
+          return slots.inject('settings.section', function () {
+            return slots.register(
+              {
+                name: 'settings.section',
+                id: 'theme',
+                order: 8,
+                label: function () {
+                  var lang = ''
+                  try { lang = (document.documentElement.lang || navigator.language || '').toLowerCase() } catch (e) {}
+                  return lang.indexOf('zh') === 0 ? '主题' : 'Theme'
+                },
+                children: { 'settings.theme.item': { kind: 'list', scope: 'root' } },
+              },
+              function ThemeSection(props) {
+                var renderSlot = props && props.renderSlot
+                return React.createElement(
+                  'div',
+                  { 'data-dsh-theme-page': '' },
+                  renderSlot ? renderSlot('settings.theme.item', {}) : null,
+                )
+              },
+            )
+          })
+        },
+        function () {
+          var slots = ctx.get('slots')
+          if (slots === undefined || React === undefined) return undefined
           return slots.inject('settings.theme.item', function () {
             return slots.register(
               { name: 'settings.theme.item', id: 'liquid-glass-' + controller.id, order: 30 },
